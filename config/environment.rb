@@ -1,10 +1,22 @@
-# Load the Rails application.
-require_relative "application"
+require_relative "boot"
+require "rails/all"
 
-# Initialize the Rails application.
+Bundler.require(*Rails.groups)
 
-config.assets.compile = true
+module YourApp
+  class Application < Rails::Application
+    # Configuration for the application
 
+    # ...
 
-Rails.application.initialize!
-Rails.application.config.assets.precompile += %w( application.js application.css )
+    # Initialize configuration defaults for originally generated Rails version.
+    config.load_defaults 7.0
+
+    # Disable automatic asset initialization during precompilation
+    config.assets.initialize_on_precompile = false
+
+    # ...
+
+    # Other configuration options
+  end
+end
