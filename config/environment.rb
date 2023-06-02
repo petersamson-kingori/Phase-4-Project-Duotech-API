@@ -7,3 +7,4 @@ config.assets.compile = true
 
 
 Rails.application.initialize!
+Rails.application.config.assets.precompile += %w( application.js application.css )
