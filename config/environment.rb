@@ -1,22 +1,10 @@
-require_relative "boot"
-require "rails/all"
+# This is an _environment variable_ that is used by some of the Rake tasks to determine
+# if our application is running locally in development, in a test environment, or in production
+ENV['RACK_ENV'] ||= "development"
 
-Bundler.require(*Rails.groups)
+# Require in Gems
+require 'bundler/setup'
+Bundler.require(:default, ENV['RACK_ENV'])
 
-module YourApp
-  class Application < Rails::Application
-    # Configuration for the application
-
-    # ...
-
-    # Initialize configuration defaults for originally generated Rails version.
-    config.load_defaults 7.0
-
-    # Disable automatic asset initialization during precompilation
-    config.assets.initialize_on_precompile = false
-
-    # ...
-
-    # Other configuration options
-  end
-end
+# Require in all files in 'app' directory
+require_all 'app'
